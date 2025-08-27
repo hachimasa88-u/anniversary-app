@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icon.jpg">
+  <link rel="apple-touch-icon" href="icon.jpg">
+  <title>4年半記念アプリ</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 30px 20px 20px 20px;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    #photo {
+      max-width: 90%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      margin: 20px 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    #photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    #message {
+      font-size: 1.2rem;
+      margin: 20px;
+      background: #ffffff;
+      display: inline-block;
+      padding: 18px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1> 本日の一枚 ＆ メッセージ </h1>
+
+  <div>
+    <img id="photo" src="" alt="今日の一枚">
+  </div>
+
+  <div id="message">メッセージがここに表示されます</div>
+
+  <script>
+    const photos = [
+      "photos/S__32874513_0.jpg",
+      "photos/S__32874515_0.jpg",
+      "photos/S__32874516_0.jpg",
+      "photos/S__32874517_0.jpg",
+      "photos/S__32874518_0.jpg",
+      "photos/S__32874519_0.jpg",
+      "photos/S__32874520_0.jpg",
+      "photos/S__32874521_0.jpg",
+      "photos/S__32874522_0.jpg",
+      "photos/S__32874523_0.jpg",
+      "photos/S__32874524_0.jpg",
+      "photos/S__32874526_0.jpg",
+      "photos/S__32874527_0.jpg",
+      "photos/S__32874528_0.jpg",
+      "photos/S__32874529_0.jpg",
+      "photos/S__32874530_0.jpg",
+      "photos/S__32874531_0.jpg",
+      "photos/S__32874532_0.jpg",
+      "photos/S__32874533_0.jpg",
+      "photos/S__32874534_0.jpg",
+      "photos/S__32874535_0.jpg",
+      "photos/S__32874537_0.jpg",
+      "photos/S__32874538_0.jpg",
+      "photos/S__32874539_0.jpg",
+      "photos/S__32874540_0.jpg",
+      "photos/S__32874541_0.jpg",
+      "photos/S__32874542_0.jpg",
+      "photos/S__32874543_0.jpg",
+      "photos/S__32874544_0.jpg",
+      "photos/S__32874545_0.jpg",
+      "photos/S__32874546_0.jpg",
+      "photos/S__32874548_0.jpg",
+      "photos/S__32874549_0.jpg",
+      "photos/S__32874550_0.jpg",
+      "photos/S__32874551_0.jpg",
+      "photos/S__32874552_0.jpg",
+      "photos/S__32874553_0.jpg",
+      "photos/S__32874554_0.jpg",
+      "photos/S__32874555_0.jpg",
+      "photos/S__32874556_0.jpg",
+      "photos/S__32874557_0.jpg",
+      "photos/S__32874559_0.jpg",
+      "photos/S__32874560_0.jpg",
+      "photos/S__32874561_0.jpg",
+      "photos/S__32874562_0.jpg",
+      "photos/S__32874563_0.jpg",
+      "photos/S__32874564_0.jpg",
+      "photos/S__32874565_0.jpg",
+      "photos/S__32874566_0.jpg",
+      "photos/S__32874567_0.jpg",
+      "photos/S__32874568_0.jpg",
+      "photos/S__32874570_0.jpg",
+      "photos/S__32874571_0.jpg",
+      "photos/S__32874572_0.jpg",
+      "photos/S__32874573_0.jpg",
+      "photos/S__32874574_0.jpg",
+      "photos/S__32874575_0.jpg",
+      "photos/S__32874576_0.jpg",
+      "photos/S__32874577_0.jpg",
+      "photos/S__32874578_0.jpg",
+      "photos/S__32874579_0.jpg",
+      "photos/S__32874581_0.jpg",
+      "photos/S__32874582_0.jpg",
+      "photos/S__32874583_0.jpg",
+      "photos/S__32874584_0.jpg",
+      "photos/S__32874585_0.jpg",
+      "photos/S__32874586_0.jpg",
+      "photos/S__32874587_0.jpg",
+      "photos/S__32874588_0.jpg",
+      "photos/S__32874589_0.jpg",
+      "photos/S__32874590_0.jpg",
+      "photos/S__32874592_0.jpg",
+      "photos/S__32874593_0.jpg",
+      "photos/S__32874594_0.jpg",
+      "photos/S__32874595_0.jpg",
+      "photos/S__32874596_0.jpg",
+      "photos/S__32874597_0.jpg",
+      "photos/S__32874598_0.jpg",
+      "photos/S__32874599_0.jpg",
+      "photos/S__32874600_0.jpg",
+      "photos/S__32874601_0.jpg",
+      "photos/S__32874603_0.jpg",
+      "photos/S__32874604_0.jpg",
+      "photos/S__32874605_0.jpg",
+      "photos/S__32874606_0.jpg",
+      "photos/S__32874607_0.jpg",
+      "photos/S__32874608_0.jpg",
+      "photos/S__32874609_0.jpg",
+      "photos/S__32874610_0.jpg",
+      "photos/S__32874611_0.jpg",
+      "photos/S__32874612_0.jpg",
+      "photos/S__32874614_0.jpg",
+      "photos/S__32874615_0.jpg",
+      "photos/S__32874616_0.jpg",
+      "photos/S__32874617_0.jpg",
+      "photos/S__32874618_0.jpg",
+      "photos/S__32874619_0.jpg",
+      "photos/S__32874620_0.jpg",
+      "photos/S__32874621_0.jpg",
+      "photos/S__32874622_0.jpg",
+      "photos/S__32874623_0.jpg",
+      "photos/S__32874625_0.jpg",
+      "photos/S__32874626_0.jpg",
+      "photos/S__32874627_0.jpg",
+      "photos/S__32874628_0.jpg",
+      "photos/S__32874629_0.jpg",
+      "photos/S__32874630_0.jpg",
+      "photos/S__32874631_0.jpg",
+      "photos/S__32874632_0.jpg",
+      "photos/S__32874633_0.jpg",
+      "photos/S__32874634_0.jpg",
+      "photos/S__32874636_0.jpg",
+      "photos/S__32874637_0.jpg",
+      "photos/S__32874638_0.jpg",
+      "photos/S__32874639_0.jpg",
+      "photos/S__32874640_0.jpg",
+      "photos/S__32874641_0.jpg",
+      "photos/S__32874642_0.jpg",
+      "photos/S__32874643_0.jpg",
+      "photos/S__32874644_0.jpg",
+      "photos/S__32874645_0.jpg",
+      "photos/S__32874647_0.jpg",
+      "photos/S__32874648_0.jpg",
+      "photos/S__32874649_0.jpg",
+      "photos/S__32874650_0.jpg",
+      "photos/S__32874651_0.jpg",
+      "photos/S__32874652_0.jpg",
+      "photos/S__32874653_0.jpg",
+      "photos/S__32874654_0.jpg",
+      "photos/S__32874655_0.jpg",
+      "photos/S__32874656_0.jpg",
+      "photos/S__32874658_0.jpg",
+      "photos/S__32874659_0.jpg",
+      "photos/S__32874660_0.jpg",
+      "photos/S__32874661_0.jpg",
+      "photos/S__32874662_0.jpg",
+      "photos/S__32874663_0.jpg",
+      "photos/S__32874664_0.jpg",
+      "photos/S__32874665_0.jpg",
+      "photos/S__32874666_0.jpg",
+      "photos/S__32874667_0.jpg",
+      "photos/S__32874669_0.jpg",
+      "photos/S__32874670_0.jpg",
+      "photos/S__32874671_0.jpg",
+      "photos/S__32874672_0.jpg",
+      "photos/S__32874673_0.jpg",
+      "photos/S__32874674_0.jpg",
+      "photos/S__32874675_0.jpg",
+      "photos/S__32874676_0.jpg",
+      "photos/S__32874677_0.jpg",
+      "photos/S__32874678_0.jpg",
+      "photos/S__32874680_0.jpg",
+      "photos/S__32874681_0.jpg",
+      "photos/S__32874682_0.jpg",
+      "photos/S__32874683_0.jpg",
+      "photos/S__32874684_0.jpg",
+      "photos/S__32874685_0.jpg",
+      "photos/S__32874686_0.jpg",
+      "photos/S__32874687_0.jpg",
+      "photos/S__32874688_0.jpg",
+      "photos/S__32874689_0.jpg",
+      "photos/S__32874691_0.jpg",
+      "photos/S__32874692_0.jpg",
+      "photos/S__32874693_0.jpg",
+      "photos/S__32874694_0.jpg",
+      "photos/S__32874695_0.jpg",
+      "photos/S__32874696_0.jpg",
+      "photos/S__32874697_0.jpg",
+      "photos/S__32874698_0.jpg",
+      "photos/S__32874699_0.jpg",
+      "photos/S__32874700_0.jpg",
+      "photos/S__32874702_0.jpg",
+      "photos/S__32874703_0.jpg",
+      "photos/S__32874704_0.jpg",
+      "photos/S__32874705_0.jpg",
+      "photos/S__32874706_0.jpg",
+      "photos/S__32874707_0.jpg",
+      "photos/S__32874708_0.jpg",
+      "photos/S__32874709_0.jpg",
+      "photos/S__32874710_0.jpg",
+      "photos/S__32874711_0.jpg",
+      "photos/S__32874713_0.jpg",
+      "photos/S__32874714_0.jpg",
+      "photos/S__32874715_0.jpg",
+      "photos/S__32874716_0.jpg",
+      "photos/S__32874717_0.jpg",
+      "photos/S__32874718_0.jpg",
+      "photos/S__32874719_0.jpg",
+      "photos/S__32874720_0.jpg",
+      "photos/S__32874721_0.jpg",
+      "photos/S__32874722_0.jpg",
+      "photos/S__32874724_0.jpg",
+      "photos/S__32874725_0.jpg",
+      "photos/S__32874726_0.jpg",
+      "photos/S__32874727_0.jpg",
+      "photos/S__32874728_0.jpg",
+      "photos/S__32874729_0.jpg",
+      "photos/S__32874730_0.jpg",
+      "photos/S__32874731_0.jpg",
+      "photos/S__32874732_0.jpg",
+      "photos/S__32874733_0.jpg",
+      "photos/S__32874735_0.jpg",
+      "photos/S__32874736_0.jpg",
+      "photos/S__32874737_0.jpg"
+    ];
+
+    const messages = [
+      "好きなとこ：体臭がすき",
+      "好きなとこ：肌がすべすべ",
+      "好きなとこ：肌がひんやりつめたい",
+      "好きなとこ：足癖が悪いところ",
+      "好きなとこ：足が長いところ(ちょっと分けて)",
+      "好きなとこ：体が柔らかい",
+      "好きなとこ：おしりがボン",
+      "好きなとこ：腹筋があるところ",
+      "好きなとこ：胸が小さいと気にしている様子",
+      "好きなとこ：洋服が似合うところ",
+      "好きなとこ：ほっぺがぷにぷに",
+      "好きなとこ：目がかわいい",
+      "好きなとこ：口がセクシー",
+      "好きなとこ：歯が白い",
+      "好きなとこ：口が臭くない",
+      "好きなとこ：鼻が小さいとこ",
+      "好きなとこ：いろんな髪型が似合うところ",
+      "好きなとこ：いろんな髪色が似合うところ",
+      "好きなとこ：髪の毛良いにおいがする",
+      "好きなとこ：シンプルにかわいいところ",
+      "好きなとこ：スマホを一緒に探してくれる",
+      "好きなとこ：いつもニコニコ",
+      "好きなとこ：げらげら笑うとこ",
+      "好きなとこ：エピソードトーク早口なとこ",
+      "好きなとこ：目見てご飯食べるとこ",
+      "好きなとこ：リアクションが全力なとこ",
+      "好きなとこ：友達と仲良くしてくれる",
+      "好きなとこ：良い友達を持っているとこ",
+      "好きなとこ：家族とめちゃ仲良し",
+      "好きなとこ：感情表現が豊か",
+      "好きなとこ：良く感動して泣くところ",
+      "好きなとこ：泣き虫きょうちゃんなとこ",
+      "好きなとこ：シンプルに優しいとこ",
+      "好きなとこ：常識がしっかりしてるとこ",
+      "好きなとこ：ちょっぴりおばかちゃんなとこ",
+      "好きなとこ：機械系弱いとこ",
+      "好きなとこ：写真を撮るのが好きなところ",
+      "好きなとこ：写真を見返している姿",
+      "好きなとこ：話すとき「あの」をめっちゃ挟む",
+      "好きなとこ：仕事終わりに電話してくれる",
+      "好きなとこ：嫌なことは伝えてくれる",
+      "好きなとこ：チューが大好きなとこ",
+      "好きなとこ：たくさん家で遊ばせてくれる",
+      "好きなとこ：調べごと手伝ってくれる",
+      "好きなとこ：仕事全力で頑張ってる",
+      "好きなとこ：毎回お会計払おうとしてくれる",
+      "好きなとこ：いつも会う日を決めてくれる",
+      "好きなとこ：ノリが合う",
+      "好きなとこ：たくさんつっこんでくれる",
+      "好きなとこ：カエル化をネタに変えてくれる",
+      "好きなとこ：「かっこいい」を言葉で伝えてくれる",
+      "好きなとこ：器用",
+      "好きなとこ：手作りのお菓子めちゃ上手い",
+      "好きなとこ：裁縫ができる",
+      "好きなとこ：ピアノ弾けるの惚れる",
+      "好きなとこ：肝が据わってる",
+      "好きなとこ：さびしがりやなとこ",
+      "好きなとこ：のどかけるとこ",
+      "好きなとこ：眠い中、迎えに来てくれるとこ",
+      "好きなとこ：美意識が高いところ",
+      "好きなとこ：いつもかわいくしてくれるところ",
+      "好きなとこ：描く絵がかわいい",
+      "好きなとこ：ジムに一緒についてきてくれるとこ",
+      "好きなとこ：うちっぱに一緒に行けるとこ",
+      "好きなとこ：サウナに一緒に行けるとこ",
+      "好きなとこ：お酒を一緒に飲めるとこ",
+      "好きなとこ：カラオケに一緒に行ってくれるとこ",
+      "好きなとこ：家族と仲良くしてくれるとこ",
+      "好きなとこ：なんでも楽しんでくれるところ",
+      "好きなとこ：ツンデレ",
+      "好きなとこ：一緒にスポーツ楽しめるところ",
+      "好きなとこ：運動神経が良いところ",
+      "好きなとこ：素直なところ",
+      "好きなとこ：いっぱい話してくれるところ",
+      "好きなとこ：女子力が高いところ",
+      "好きなとこ：気遣いができるところ",
+      "好きなとこ：真面目で一生懸命なところ",
+      "好きなとこ：他人にも明るく接するとこ",
+      "好きなとこ：一緒に古着屋に行ってくれるとこ",
+      "好きなとこ：プレゼントのセンスが良いところ",
+      "好きなとこ：車のナンバー88にしたとこ",
+      "好きなとこ：よく歌うところ",
+      "好きなとこ：よく踊るところ",
+      "好きなとこ：無理やり海に連れて行ってくれる",
+      "好きなとこ：行事を大切にするとこ",
+      "好きなとこ：子供から好かれるとこ",
+      "好きなとこ：プレゼントしたら大切に使ってくれる",
+      "好きなとこ：たくさん褒めてくれる",
+      "好きなとこ：好かれる努力を怠らない",
+      "好きなとこ：我慢して絶叫系付き合ってくれる",
+      "好きなとこ：面白いドラマ教えてくれる",
+      "好きなとこ：嬉しそうなときの表情",
+      "好きなとこ：楽しみな旅行の洋服決めだすの早い",
+      "好きなとこ：眉毛整えてくれる",
+      "好きなとこ：眠い時甘えてくれる",
+      "好きなとこ：怪我してもすぐ安心させてくれる",
+      "好きなとこ：地面に一緒に寝転がってくれる",
+      "好きなとこ：シンプルくるまかっけー",
+      "好きなとこ：誕生日盛大に祝ってくれる",
+      "好きなとこ：たまに年上のお姉さんを感じる"
+    ];
+
+    function getSeed() {
+      // 日付でシード生成（YYYYMMDD形式）
+      const today = new Date();
+      return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    }
+
+    function seededRandom(seed) {
+      // 簡易擬似乱数生成
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function showDailyRandom() {
+      const seed = getSeed();
+
+      const photoIndex = Math.floor(seededRandom(seed) * photos.length);
+      const messageIndex = Math.floor(seededRandom(seed + 1) * messages.length);
+
+      document.getElementById("photo").src = photos[photoIndex];
+      document.getElementById("message").innerText = messages[messageIndex];
+    }
+
+    window.onload = showDailyRandom;
+  </script>
+</body>
+</html>
